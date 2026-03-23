@@ -1433,9 +1433,9 @@ footer::before{
       <div class="ft-logo">HARSH<span>.DEVELOPER</span></div>
       <p>A passionate BCA student & web developer building sleek, modern, and user-friendly digital experiences.</p>
       <div class="ft-soc">
-        <a href="https://www.instagram.com/coderharshhere.official/" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.facebook.com/share/1Hn1777eFN/" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="https://www.youtube.com/@coderharshhere5493" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.instagram.com/coderharshhere" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com/coderharshhere" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.youtube.com/@coderharshhere" target="_blank"><i class="fab fa-youtube"></i></a>
       </div>
     </div>
     <div class="ft-col">
@@ -1637,11 +1637,43 @@ function filterPort(cat,btn){
    SEND FORM
 ============================================================ */
 function handleSend(){
-  const btn=document.querySelector('.f-submit');
-  btn.innerHTML='<i class="fas fa-check-circle"></i> MESSAGE SENT! ✓';
-  btn.style.background='linear-gradient(135deg,#34d399,#059669)';
-  btn.style.boxShadow='0 8px 28px rgba(52,211,153,.4)';
-  setTimeout(()=>{ btn.innerHTML='<i class="fas fa-paper-plane"></i> SEND MESSAGE'; btn.style.background=''; btn.style.boxShadow=''; },3200);
+  const btn = document.querySelector('.f-submit');
+
+  // Get values
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let phone = document.getElementById("phone").value;
+  let subject = document.getElementById("subject").value;
+  let message = document.getElementById("message").value;
+
+  // Create full WhatsApp message
+  let fullMessage =
+    "New Contact Form Message:%0A%0A" +
+    "Name: " + name + "%0A" +
+    "Email: " + email + "%0A" +
+    "Phone: " + phone + "%0A" +
+    "Subject: " + subject + "%0A" +
+    "Message: " + message;
+
+  // Your WhatsApp number
+  let phoneNumber = "918435273042";
+
+  let url = "https://wa.me/" + phoneNumber + "?text=" + fullMessage;
+
+  // Button animation
+  btn.innerHTML = '<i class="fas fa-check-circle"></i> MESSAGE SENT! ✓';
+  btn.style.background = 'linear-gradient(135deg,#34d399,#059669)';
+  btn.style.boxShadow = '0 8px 28px rgba(52,211,153,.4)';
+
+  // Open WhatsApp
+  window.open(url, "_blank");
+
+  // Reset button
+  setTimeout(()=>{
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> SEND MESSAGE';
+    btn.style.background = '';
+    btn.style.boxShadow = '';
+  }, 3200);
 }
 
 /* ============================================================
