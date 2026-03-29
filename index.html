@@ -1418,7 +1418,7 @@ footer::before{
           <div class="f-grp"><label><i class="fas fa-phone" style="margin-right:5px;color:var(--cyan2)"></i> Phone</label><input type="tel"id="phone" placeholder="+91 8435273042"></div>
           <div class="f-grp"><label><i class="fas fa-tag" style="margin-right:5px;color:var(--violet)"></i> Subject</label><input type="text" id="subject"placeholder="Project / Collaboration"></div>
         </div>
-        <div class="f-grp"><label><i class="fas fa-comment-dots" style="margin-right:5px;color:var(--blue2)"></i> Message</label><textareaid="message" rows="5" placeholder="Tell me about your project or idea..."></textarea></div>
+        <div class="f-grp"><label><i class="fas fa-comment-dots" style="margin-right:5px;color:var(--blue2)"></i> Message</label><textarea id="message" rows="5" placeholder="Tell me about your project or idea..."></textarea></div>
         <button class="f-submit" onclick="handleSend()"><i class="fas fa-paper-plane"></i> SEND MESSAGE</button>
         <p class="f-note">⚡ I usually reply within 24 hours.</p>
       </div>
@@ -1639,41 +1639,26 @@ function filterPort(cat,btn){
 function handleSend(){
   const btn = document.querySelector('.f-submit');
 
-  // Get values
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
   let phone = document.getElementById("phone").value;
   let subject = document.getElementById("subject").value;
   let message = document.getElementById("message").value;
 
-  // Create full WhatsApp message
-  let fullMessage =
-    "New Contact Form Message:%0A%0A" +
-    "Name: " + name + "%0A" +
-    "Email: " + email + "%0A" +
-    "Phone: " + phone + "%0A" +
-    "Subject: " + subject + "%0A" +
-    "Message: " + message;
+  let fullMessage = encodeURIComponent(
+    "New Contact Form Message:\n\n" +
+    "Name: " + name + "\n" +
+    "Email: " + email + "\n" +
+    "Phone: " + phone + "\n" +
+    "Subject: " + subject + "\n" +
+    "Message: " + message
+  );
 
-  // Your WhatsApp number
   let phoneNumber = "918435273042";
 
   let url = "https://wa.me/" + phoneNumber + "?text=" + fullMessage;
 
-  // Button animation
-  btn.innerHTML = '<i class="fas fa-check-circle"></i> MESSAGE SENT! ✓';
-  btn.style.background = 'linear-gradient(135deg,#34d399,#059669)';
-  btn.style.boxShadow = '0 8px 28px rgba(52,211,153,.4)';
-
-  // Open WhatsApp
   window.open(url, "_blank");
-
-  // Reset button
-  setTimeout(()=>{
-    btn.innerHTML = '<i class="fas fa-paper-plane"></i> SEND MESSAGE';
-    btn.style.background = '';
-    btn.style.boxShadow = '';
-  }, 3200);
 }
 
 /* ============================================================
